@@ -1,0 +1,119 @@
+<HTA:APPLICATION 
+applicationname="Locked"
+id="entry"
+version="1.0"
+SINGLEINSTANCE="yes"
+/>
+ 
+   <head>
+      <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+      <title>Passwords And Private Info</title>
+   </head>
+   <script type="text/vbscript">
+   
+    Public Sub Window_onLoad
+	document.getElementById("All").style.display="none"
+    Dim WShell : Set WShell = CreateObject("WScript.Shell")
+	Set wshShell = CreateObject( "WScript.Shell" )
+	DIM PIN 
+	PIN = InputBox( "Pin Code?" )
+	If PIN="1234" Then
+	document.getElementById("All").style.display="block"
+	Else
+	document.getElementById("All").style.display="none"
+	Window.Close
+	End if
+    End Sub
+			  
+					Sub LogImpact()
+      			    Dim WShell : Set WShell = CreateObject("WScript.Shell")		
+                      With WShell
+					  ret = .AppActivate("Login") 
+						If ret = True Then
+      					.AppActivate "Login"
+      					.SendKeys  ""
+      					.SendKeys  "{TAB}"
+						.SendKeys  ""
+						.SendKeys  "{ENTER}"
+						End If
+						If ret = False Then
+						alert("ERROR  Not Loaded")
+						End If						
+                      End With
+                  End Sub
+				  
+				  	Sub EncPass()
+      			    Dim WShell : Set WShell = CreateObject("WScript.Shell")	
+                      With WShell
+					  ret = .AppActivate("") 
+						If ret = True Then
+      					.AppActivate ""
+      					.SendKeys  ""
+      					.SendKeys  "{TAB}"
+						.SendKeys  unescape("")
+						.SendKeys  "{ENTER}"
+						End If
+						If ret = False Then
+						alert("ERROR Not Loaded")
+						End If						
+                      End With
+                  End Sub
+				  
+				Sub LogZeon()
+      			    Dim WShell : Set WShell = CreateObject("WScript.Shell")		
+                      With WShell
+					  ret = .AppActivate("") 
+						If ret = True Then
+      					.AppActivate ""
+      					.SendKeys  "{TAB 6}"
+						.SendKeys  ""
+						.SendKeys  "{TAB}"
+						.SendKeys  ""
+						.SendKeys  "{TAB}"
+						.SendKeys  " "
+						.SendKeys  "{TAB}"
+						.SendKeys  " "
+						End If
+						If ret = False Then
+						alert("ERROR Not Loaded")
+						End If						
+                      End With
+                  End Sub		  
+				  
+			  
+   </script>
+   </head>
+      <body background="back.jpg">
+      <style>
+         h1{margin-bottom: 0px; margin-top: 10px; Color: White;}
+		 h2{margin-bottom: 0px; margin-top: 10px; Color: White;}
+         h4{margin-bottom: 0px; margin-top: 10px; Color: White;}
+         h5{margin-bottom: 0px; margin-top: 0px; Color: White;}
+      </style>
+		 
+	<div id="All" display="none">		 
+	<H1>Passwords</H1>
+	<H5>Open Impact</H5>
+	<button onclick="LogImpact()">Login To 1</button><BR>
+	<H5>Open </H5>
+	<button onclick="LogZeon()">Login To 2</button><BR>
+	<H1>Accounts & Passwords</H1>
+	
+	<button onclick="EncPass()">EncPass</button><BR>
+	<H1>Accounts & Passwords</H1>
+	
+	<H4>1</H4>
+	<H5></H5>
+	<H5>User:</H5>
+	<H5>Password:</H5>
+	
+	<H4>2</H4>
+	<H5></H5>
+	<H5>User:</H5>
+	<H5>Password:</H5>
+	
+	</div>
+	
+</body>
+
+</html>
