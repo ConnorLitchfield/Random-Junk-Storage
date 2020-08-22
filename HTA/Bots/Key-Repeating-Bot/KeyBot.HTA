@@ -1,0 +1,140 @@
+<!doctype html>
+<html>
+
+<HTA:APPLICATION ICON="icon.ico"
+applicationname="entry"
+id="entry"
+version="1.0"
+SINGLEINSTANCE="yes"
+/>
+   <head>
+      <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+      <title>Send Keys</title>
+   </head>
+   <script type="text/vbscript">
+      Public Sub Window_onLoad
+	  window.resizeTo 450,305
+      datea = date()
+      document.title = "Today's Date is " & datea
+      Dim WShell : Set WShell = CreateObject("WScript.Shell")
+      Dim DShell
+      DShell = "436f6e6e6f72204c697463686669656c64"
+	  Set wshShell = CreateObject( "WScript.Shell" )
+	strUserName = wshShell.ExpandEnvironmentStrings( "%USERNAME%" )
+    End Sub
+      
+	            Sub Sleep(intTimeWait)  
+                      Dim Shell : Set Shell = CreateObject("WScript.Shell")  
+                      Shell.Run "%comspec% /c ping.exe 127.0.0.1 -w 1000 -n " & _  
+                          intTimeWait + 1, 0, True  
+                End Sub
+				
+				Public KeySet
+				Public Min
+				Public Max
+				Public RepeatSet
+				Public ScriptRun
+				
+				Public Sub Settings()
+      			Dim WShell : Set WShell = CreateObject("WScript.Shell")	
+      				KeySet = InputBox( "What Key" )
+      				Min = InputBox( "Min Delay In Seconds" )	
+					Max = InputBox( "Max Delay In Seconds" )
+					RepeatSet = InputBox( "How Many Times Should This Repeat?" )
+					document.getElementById("KeySetb").innerHTML = KeySet
+					document.getElementById("MinSetb").innerHTML = Min
+					document.getElementById("MaxSetb").innerHTML = Max
+					RepeatSetC = RepeatSet
+					document.getElementById("RepeatSetb").innerHTML = RepeatSetC
+					document.getElementById("ScriptRunb").innerHTML = "Stopped"
+      			End Sub	
+      			
+      			Public Sub Starta()
+      			Dim WShell : Set WShell = CreateObject("WScript.Shell")	
+                      With WShell
+						ScriptRun = "Running"
+						Call Run
+                      End With
+      			End Sub	
+				
+				Public Sub Stopa()
+      			Dim WShell : Set WShell = CreateObject("WScript.Shell")	
+                      With WShell
+					  ScriptRun = "Stopped"
+					  document.getElementById("ScriptRunb").innerHTML = "Stopped"
+                      End With
+      			End Sub	
+				
+				Public Sub Run()
+				alert ("Click ok than click the game window, note there will be a delay of 5 seconds before key press's begin")
+				document.getElementById("ScriptRunb").innerHTML = "Open Game Window Now, 5 second delay active."
+				sleep 5
+				Dim WShell : Set WShell = CreateObject("WScript.Shell")	
+				Dim RNDN
+				dim i
+				dim p
+				dim o
+				p = RepeatSet
+				RNDN = RepeatSet + 1
+				document.getElementById("ScriptRunb").innerHTML = "Running"
+				Do While RNDN > 1 
+				RNDN=RNDN-1
+				i = RNDN
+				rnt=Math.random() * (+max - +min) + +min
+				document.getElementById("RepeatSetb").innerHTML = RNDN-1
+				document.getElementById("RandomNumberb").innerHTML = rnt & " Seconds"
+				o = (100/p) * i
+				document.getElementById("bar").style.width = o & "%"
+                    If ScriptRun = "Running" Then
+						With WShell
+						.SendKeys KeySet
+						Sleep rnt
+						document.getElementById("ScriptRunb").innerHTML = "Running"
+						End With
+						Else
+						document.getElementById("ScriptRunb").innerHTML = "Stopped"
+					End If
+					Loop
+				document.getElementById("ScriptRunb").innerHTML = "Stopped"	
+				alert ("Scripted Keypress's has finished")
+				document.getElementById("bar").style.width = 0 & "%"
+				document.getElementById("RandomNumberb").innerHTML = " "
+      			End Sub
+				
+   </script>
+   </head>
+      <body id="main" background="1.jpg" class="img-fluid" alt="Responsive image">
+      <style>
+		.w3-border {border:1px solid #ccc!important}		
+		.w3-grey {color:#000!important;background-color:#9e9e9e!important}
+		#main {background-color: black;}
+        h1{margin-bottom: 10px; margin-top: 10px; Color: WHITE;}
+		h2{margin-bottom: 0px; margin-top: 0px; Color: WHITE;}
+        h4{margin-bottom: 0px; margin-top: 0px; Color: WHITE;}
+        h5{margin-bottom: 0px; margin-top: 0px; Color: WHITE;}
+        button{margin-bottom: 1px; margin-top: 1px; margin-right: 1px; margin-left: 1px; Color: BLACK;}
+		body{position: relative; margin-top: -10px;}
+      </style>
+		 
+	<div>
+    <H1>Randomly timed key pressing bot.</H1>
+         <button onclick="Starta()">Start</button>
+		 <button onclick="Stopa()">Stop</button>
+		 <button onclick="Settings()">Settings</button>
+
+		 <h5> Key Set: <span id="KeySetb"></span></h5>
+		 <h5> Min Delay: <span id="MinSetb"></span></h5>
+		 <h5> Max Delay: <span id="MaxSetb"></span></h5>
+		 <h5> Number Of Repeats Remaining: <span id="RepeatSetb"></span></h5>
+		 <h5> Script Running: <span id="ScriptRunb"></span></h5>
+		 <h5> Current Random Time Delay: <span id="RandomNumberb"></span></h5> 
+	</div>
+	<BR>
+	<div class="w3-border">
+	<div id="bar" class="w3-grey" style="height:24px;width:0%">
+	</div>
+	</div>
+	
+</body>
+
+</html>
