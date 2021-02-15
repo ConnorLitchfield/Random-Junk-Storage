@@ -1,0 +1,120 @@
+<!doctype html>
+<html>
+   <HTA:APPLICATION
+      SINGLEINSTANCE="no"
+	  ICON="icon.ico"
+      BORDER="thick"
+      BORDERSTYLE="normal"
+      CONTEXTMENU="yes"
+      INNERBORDER="yes"
+	  />
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>Auto Entry Helper</title>
+</head>
+<script type="text/vbscript">
+window.ResizeTo 1140, 590
+
+Public Sub setall()
+where1.innerhtml = user1.value
+where2.innerhtml = user2.value
+where3.innerhtml = user3.value
+where4.innerhtml = user4.value
+where5.innerhtml = user5.value
+where6.innerhtml = user6.value
+where7.innerhtml = user7.value
+where8.innerhtml = user8.value
+where9.innerhtml = user9.value
+where10.innerhtml = user10.value
+app1.innerhtml = userapp.value & "   "
+End Sub
+
+Public Sub sendsingle(varval)
+Dim WShell : Set WShell = CreateObject("WScript.Shell")
+With WShell
+.AppActivate userapp.value
+if varval="1" then
+.SendKeys user1.value
+elseif varval="2" then
+.SendKeys user2.value
+elseif varval="3" then
+.SendKeys user3.value
+elseif varval="4" then
+.SendKeys user4.value
+elseif varval="5" then
+.SendKeys user5.value
+elseif varval="6" then
+.SendKeys user6.value
+elseif varval="7" then
+.SendKeys user7.value
+elseif varval="8" then
+.SendKeys user8.value
+elseif varval="9" then
+.SendKeys user9.value
+elseif varval="10" then
+.SendKeys user10.value
+End if
+End With
+End Sub
+
+Public Sub sendall()
+Dim WShell : Set WShell = CreateObject("WScript.Shell")
+With WShell
+.AppActivate userapp.value
+.SendKeys user1.value & user2.value & user3.value & user4.value & user5.value & user6.value & user7.value & user8.value & user9.value & user10.value
+End With
+End Sub
+
+</script>
+<body background="back.jpg">
+
+ <p style="float: right;"><img src="hints.jpg" height="510" width="400" border="1px"></p>
+
+<input type="button" value="Set all values" onClick="setall">
+<input type="button" value="Send all values" onClick="sendall">
+AppActive: <span id="app1" style="font-weight:800;">  </span><input type="text" name="userapp" size="10"><BR><BR>
+
+
+<input type="button" value="Send 1" onClick="sendsingle(1)">
+<input type="button" value="Send 2" onClick="sendsingle(2)">
+<input type="button" value="Send 3" onClick="sendsingle(3)">
+<input type="button" value="Send 4" onClick="sendsingle(4)">
+<input type="button" value="Send 5" onClick="sendsingle(5)">
+<input type="button" value="Send 6" onClick="sendsingle(6)">
+<input type="button" value="Send 7" onClick="sendsingle(7)">
+<input type="button" value="Send 8" onClick="sendsingle(8)">
+<input type="button" value="Send 9" onClick="sendsingle(9)">
+<input type="button" value="Send 10" onClick="sendsingle(10)"><BR><BR>
+
+1 Currently set to: <span id="where1" style="font-weight:800;"></span><BR>
+<input type="text" name="user1" size="107"><BR>
+
+2 Currently set to: <span id="where2" style="font-weight:800;"></span><BR>
+<input type="text" name="user2" size="107"><BR>
+
+3 Currently set to: <span id="where3" style="font-weight:800;"></span><BR>
+<input type="text" name="user3" size="107"><BR>
+
+4 Currently set to: <span id="where4" style="font-weight:800;"></span><BR>
+<input type="text" name="user4" size="107"><BR>
+
+5 Currently set to: <span id="where5" style="font-weight:800;"></span><BR>
+<input type="text" name="user5" size="107"><BR>
+
+6 Currently set to: <span id="where6" style="font-weight:800;"></span><BR>
+<input type="text" name="user6" size="107"><BR>
+
+7 Currently set to: <span id="where7" style="font-weight:800;"></span><BR>
+<input type="text" name="user7" size="107"><BR>
+
+8 Currently set to: <span id="where8" style="font-weight:800;"></span><BR>
+<input type="text" name="user8" size="107"><BR>
+
+9 Currently set to: <span id="where9" style="font-weight:800;"></span><BR>
+<input type="text" name="user9" size="107"><BR>
+
+10 Currently set to: <span id="where10" style="font-weight:800;"></span><BR>
+<input type="text" name="user10" size="107"><BR>
+
+</body>
+</html>
