@@ -1,0 +1,6 @@
+In the URL data for box's can be entered I.E. 
+https://www.google.com/?q=TEST   Where q is the name of the element "?q=TEST"
+https://help.formassembly.com/help/prefill-through-the-url
+
+https://developer.mozilla.org/en-US/docs/Web/API/Window/find
+
