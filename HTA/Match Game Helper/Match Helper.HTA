@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+   <HTA:APPLICATION
+      SINGLEINSTANCE="yes"
+	  ICON="icon.ico"
+      BORDER="thick"
+      BORDERSTYLE="normal"
+      CONTEXTMENU="yes"
+      INNERBORDER="yes"
+	  />
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>Match Helper Level 4</title>
+</head>
+<script type="text/vbscript">
+      Public Sub Window_onLoad
+	  window.resizeTo 250,95
+    End Sub
+
+Sub run4
+	Set objShell = CreateObject("WScript.Shell")
+	objShell.Run (""".\Match Level 4\Match Game Helper 4.hta""")
+End Sub
+
+Sub run5
+	Set objShell = CreateObject("WScript.Shell")
+	objShell.Run (""".\Match Level 5\Match Game Helper 5.hta""")
+End Sub
+
+Sub run6
+	Set objShell = CreateObject("WScript.Shell")
+	objShell.Run (""".\Match Level 6\Match Game Helper 6.hta""")
+End Sub
+
+</script>
+
+<body background="Match Level 4\1.jpg">
+ <input type="button" value="Level 4" onClick="run4">
+ <input type="button" value="Level 5" onClick="run5">
+ <input type="button" value="Level 6" onClick="run6">
+</body>
+</html>
