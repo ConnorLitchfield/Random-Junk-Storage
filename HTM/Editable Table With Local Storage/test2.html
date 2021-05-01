@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+  <meta charset="utf-8">
+  
+<!-- Styles -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<style>
+div.a {
+  font-size: 50px;
+}
+</style>
+<!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+</head>
+
+<body onload="checkEdits()">
+    <div class="a">TABLE</div>
+        <button class="btn btn-info" id="add"><span class="glyphicon glyphicon-plus-sign"></span> Add New Entry</button><br>
+		<input type="button" value="Save Changes" onclick="saveEdits()"/>
+		<br>
+		<br>
+		<input type="button" value="Export box" onclick="hideshowexport()"/>
+		<div id="exportboxhide" style="display: none;">
+		<input type="text" name="exportbox" id="exportbox" readonly="true" />  <input type="button" value="Copy" onclick="copyexport()"/>
+		</div>
+    
+	<div class="table-content">
+<table class="table table-borded table-responsive table-striped " id="konastable-list">
+<thead class="table-dark">
+<tr>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+</div>    
+
+    <br>
+
+<script src="bootstable.js"></script>
+<script>
+//apply
+$("#konastable-list").SetEditable();
+$('#add').click(function() {rowAddNew('konastable-list', [1,2,3]);});
+
+function saveEdits() {
+//get the editable element
+var editElem = document.getElementById("konastable-list");
+//get the edited element content
+var userVersion = editElem.innerHTML;
+//save the content to local storage
+localStorage.userEdits = userVersion;
+// Notify user
+alert("Changes Saved");
+location.reload();
+}
+
+function checkEdits() {
+//find out if the user has previously saved edits
+if(localStorage.userEdits!=null)
+document.getElementById("konastable-list").innerHTML = localStorage.userEdits;
+var JSONstring = JSON.stringify(JSON.stringify(localStorage))
+var code1 = "var data = JSON.parse("
+var code2 = ");Object.keys(data).forEach(function (k) {localStorage.setItem(k, data[k]);});"
+document.getElementById("exportbox").value = code1 + JSONstring + code2;
+}
+
+function copyexport() {
+var copyText = document.getElementById("exportbox");
+  /* Select the text field */
+  copyText.select();
+  /* Copy the text inside the text field */
+  document.execCommand("copy");
+  /* Alert the copied text */
+  alert("Copied the data");
+}
+
+function hideshowexport() {
+  var x = document.getElementById("exportboxhide");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+
+</script>
+</body>
+
+</html>
