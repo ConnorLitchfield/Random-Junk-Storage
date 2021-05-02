@@ -1,0 +1,3 @@
+in dev console of webpages
+document.body.contentEditable = "true";
+makes website editablemcompletely
