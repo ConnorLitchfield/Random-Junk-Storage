@@ -1,2 +1,0 @@
-To send a message to a local user.
-/c msg 093329 SIGN IN!
