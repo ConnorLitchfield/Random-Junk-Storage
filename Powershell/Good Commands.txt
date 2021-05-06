@@ -1,0 +1,11 @@
+Bulk Change a names in a dir with counting numbers
+Dir *.jpg | ForEach-Object  -begin { $count=1 }  -process { rename-item $_ -NewName "image$count.jpg"; $count++ }
+
+Bulk Change a extension
+Dir *.jpeg | rename-item -newname {  $_.name  -replace ".jpeg",".jpg"  }
+
+List all Devices VID\PID\SN 
+gwmi Win32_USBControllerDevice |%{[wmi]($_.Dependent)} | Where-Object {($_.Description -like '*')} | Sort Description,DeviceID | ft Description,DeviceID –auto
+
+List all files in a directory
+Get-ChildItem -File "C:\"
