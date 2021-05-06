@@ -8,4 +8,4 @@ List all Devices VID\PID\SN
 gwmi Win32_USBControllerDevice |%{[wmi]($_.Dependent)} | Where-Object {($_.Description -like '*')} | Sort Description,DeviceID | ft Description,DeviceID –auto
 
 List all files in a directory
-Get-ChildItem -File "C:\"
+Get-ChildItem "C:\"
