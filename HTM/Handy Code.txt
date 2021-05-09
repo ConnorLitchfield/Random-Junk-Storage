@@ -1,0 +1,9 @@
+in dev console of webpages
+document.body.contentEditable = "true";
+makes website editablemcompletely
+
+In the URL data for box's can be entered I.E. 
+https://www.google.com/?q=TEST   Where q is the name of the element "?q=TEST"
+https://help.formassembly.com/help/prefill-through-the-url
+
+

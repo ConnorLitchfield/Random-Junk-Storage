@@ -1,0 +1,3 @@
+To send a message to a local user.
+Via Scheduler = /c msg Konastar SIGN IN!
+Via CMD = msg 093329 SIGN IN!
