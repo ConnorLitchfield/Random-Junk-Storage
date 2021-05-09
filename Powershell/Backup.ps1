@@ -1,63 +1,61 @@
-$wshell = New-Object -ComObject Wscript.Shell
+# Load Dependancies
+[System.Reflection.Assembly]::LoadWithPartialName('System.Windows.Forms')    | out-null
+[System.Reflection.Assembly]::LoadWithPartialName('presentationframework')   | out-null
+[System.Reflection.Assembly]::LoadWithPartialName('System.Drawing')    | out-null
+[System.Reflection.Assembly]::LoadWithPartialName('WindowsFormsIntegration') | out-null
 
+# Set Variables
+$wshell = New-Object -ComObject Wscript.Shell
+$Global:i = 900
+$Main_Tool_Icon = New-Object System.Windows.Forms.NotifyIcon
+$Main_Tool_Icon.Text = $noteMsg
+$Main_Tool_Icon.Icon = [System.Drawing.Icon]::ExtractAssociatedIcon("C:\Windows\System32\rstrui.exe") 
+$Main_Tool_Icon.BalloonTipTitle = “Automatic Backup Utility”
+$Main_Tool_Icon.BalloonTipIcon = “Info”
+$title = “Automatic Backup Complete.”
+$Main_Tool_Icon.BalloonTipText = $title
+$Main_Tool_Icon.ShowBalloonTip(1)
+$Main_Tool_Icon.Visible = $True
+$Main_Tool_Icon.Add_Click({run-Procedure})
+
+# Callable function that does all the work
+function run-Procedure{
+
+# Reset timer 
+$Global:i = 900
+
+# 1/1 Delete Zips in Google Drive folder D:\Backups\
 try {
 del "D:\Backups\*.zip"
-$Var1 = 1
 } catch {
-Echo "ERROR Deleting Old Zip Files In Google Drive Folder, D:\Backups."
-Echo ""
+$wshell.Popup("ERROR Deleting Old Zip Files In Google Drive Folder, D:\Backups\")
 }
 
+# 2/2 Compress both folders to Google Drive folder D:\Backups\
 try {
-del "D:\Backups\Last Backup.txt"
-$Var2 = 1
+Compress-Archive -Path "D:\Users\Konastar\Desktop\Bachelor of Information and Technology\" -DestinationPath  ('D:\Backups\Study Backup ' + (get-date -Format yyyMMdd) + '.zip') -Force
+Compress-Archive -Path "D:\Users\Konastar\Desktop\2021 Tax's\" -DestinationPath  ('D:\Backups\Tax Backup ' + (get-date -Format yyyMMdd) + '.zip') -Force
 } catch {
-Echo "ERROR Deleting Old Last Backup.txt File In Google Drive Folder, D:\Backups."
-Echo ""
+$wshell.Popup("ERROR Zipping UniStudies To Google Drive Folder! D:\Backups")
 }
 
-try {
-Compress-Archive -Path "D:\Users\Jerremy\Desktop\Bachelor of Information and Technology\" -DestinationPath  ('D:\Backups\Study Backup ' + (get-date -Format yyyMMdd) + '.zip') -Force
-$Var3 = 1
-} catch {
-Echo "ERROR Zipping UniStudies To Google Drive Folder!"
-Echo ""
+# Show Balloon and set tool tip to waiting then wait 20
+$Main_Tool_Icon.Text = "20 Second Cool Down"
+$Main_Tool_Icon.ShowBalloonTip(1)
+sleep 20
+
 }
 
-try {
-Compress-Archive -Path "D:\Users\Jerremy\Desktop\2021 Tax's\" -DestinationPath  ('D:\Backups\Tax Backup ' + (get-date -Format yyyMMdd) + '.zip') -Force
-$Var4 = 1
-} catch {
-Echo "ERROR Zipping Tax To Google Drive Folder!"
-Echo ""
-}
-
-try {
-Copy-Item -Path "D:\Backups\*" -Destination "F:\Backups" -errorAction stop
-$Var5 = 1
-} catch {
-Echo "ERROR F:\Backups Not Present, New Zip Backup NOT Copied To External Flash."
-Echo ""
-}
-
-try {
-Copy-Item -Path "D:\Backups\*" -Destination "F:\Backups" -errorAction stop
-$Date = Get-date
-Out-File -FilePath "D:\Backups\Last Backup.txt" -InputObject $Date
-$Var6 = 1
-} catch {
-Echo "ERROR Writing to Last Backup.txt."
-Echo ""
-}
-
-$Var7 = $Var1 + $Var2 + $Var3 + $Var4 + $Var5 + $Var6
-
-if ($var7 -eq 6)
-{
-}
-Else
-{ 
-Echo "THERE WAS A ERROR, review error above."
-$wshell.Popup("THERE WAS A ERROR BACKING UP DATA, review error window.",0,"OK",0x0)
-Pause
+# While loop to count off timer, and display details on notification bar icon.
+while ( $true ) {
+do {
+    $msgm = [timespan]::fromseconds($i)
+    $m = $msgm.Minutes
+    $s = $msgm.Seconds
+    $noteMsg = "Next Backup In $m`:$s"
+    $Main_Tool_Icon.Text = $noteMsg
+    Sleep 1
+    $Global:i--
+} while ($i -ge 0)
+run-Procedure
 }
