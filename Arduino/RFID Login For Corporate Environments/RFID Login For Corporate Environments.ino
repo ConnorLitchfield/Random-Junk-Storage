@@ -6,9 +6,11 @@
 #define SS_PIN 10
 #define RST_PIN 9
 
+//Setup the pins
 LedControl lc=LedControl(12,13,11,1);
 MFRC522 mfrc522(SS_PIN,RST_PIN);
 
+//Configure callable images for the display
 byte hf[8]= {B00111100,B01000010,B10100101,B10000001,B10100101,B10011001,B01000010,B00111100};
 byte sf[8]= {B00111100,B01000010,B10100101,B10000001,B10011001,B10100101,B01000010,B00111100};
 byte x[8]=  {B10000001,B01000010,B00100100,B00011000,B00011000,B00100100,B01000010,B10000001};
@@ -41,6 +43,7 @@ byte X[8] = {B00000000,B01000010,B00100100,B00011000,B00011000,B00100100,B010000
 byte Y[8] = {B00000000,B01000100,B00101000,B00010000,B00010000,B00010000,B00010000,B00000000};
 byte Z[8] = {B00000000,B00111100,B00000100,B00001000,B00010000,B00100000,B00111100,B00000000};
 
+//Setup
 void setup() {
  Serial.begin(9600);
  SPI.begin();
@@ -60,9 +63,7 @@ void loop(){
  }
  if ( ! mfrc522.PICC_ReadCardSerial() ) {
  return;
- }
- 
-// If a card is detected, execute the following:
+ } // If a card is detected, execute the following:
  
 // Print the card's ID
 String content= "";
@@ -75,7 +76,7 @@ String content= "";
  Serial.println(content);
 
 //Check card against Content ID
-if(content == "CARD ID"){
+if(content == "CARD ID"){ //ENTER THE ID OF THE CARD YOU WISH TO USE.
 Serial.println("Unlocking");
 delay(300);
 Keyboard.releaseAll();   
@@ -95,7 +96,7 @@ Keyboard.press(KEY_DELETE);
 delay(250);
 Keyboard.releaseAll();
 delay(250);
-Keyboard.print("PASSWORD");
+Keyboard.print("PASSWORD"); //Enter your password here.
 delay(500);
 Keyboard.write(KEY_RETURN); 
 lc.clearDisplay(0);  
@@ -111,7 +112,8 @@ delay(1000);
 lc.clearDisplay(0); 
 }
 
-
+//Bellow is provissions for a second card, this one will enter both a user name and password. 
+//Use this to have one card for cold log in and one card for lock/unlock
 
 else if(content == "CARD ID"){ 
 Serial.println("Unlocking Token");
@@ -161,7 +163,7 @@ lc.clearDisplay(0);
 
 else
 
-
+//DENIED
 {         
 Serial.println("Access Denied");
 lc.clearDisplay(0); 
