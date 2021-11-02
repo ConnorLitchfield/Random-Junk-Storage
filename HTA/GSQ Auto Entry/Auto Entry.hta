@@ -1,0 +1,252 @@
+﻿<!doctype html>
+<html>
+   <HTA:APPLICATION ID="oHTA" applicationname="MyHelper" ID="entry" SINGLEINSTANCE="yes" BORDER="thick" BORDERSTYLE="normal" CONTEXTMENU="yes" INNERBORDER="yes" ICON="images/hat.ico" />
+   <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <title>My Helper</title>
+   </head>
+   <script type = "text/vbscript" >
+        Dim WShell: Set WShell = CreateObject("WScript.Shell")
+        Dim DShell: DShell = "436f6e6e6f72204c697463686669656c64"
+        
+        Public Sub Window_onLoad
+        window.offscreenBuffering = True
+        window.resizeTo 500, 700
+        End Sub
+        
+   	Sub ShortCutKeys()
+        intKeyCode = Window.Event.Keycode
+        If intKeyCode = 27 Then Window.Close 'ESC
+	If intKeyCode = 49 Then SAP2("8ff1ebcf71ea5c3b874228567a5ca143") '1
+	If intKeyCode = 50 Then SAP2("5c4c2bf6cab6436dfaad8f8c9b3a9fa2") '2
+	If intKeyCode = 51 Then SAP() '3
+    	End Sub
+
+        Public Sub Sleep(intTimeWait)
+        WShell.Run "%comspec% /c ping.exe 127.0.0.1 -w 1000 -n " & intTimeWait + 1, 0, True
+        End Sub
+        
+        Public Sub OUBP()
+        ret = WShell.AppActivate ("MDM Maintenance Request")
+	If ret = True Then
+	WShell.AppActivate ("MDM Maintenance Request")
+        WShell.SendKeys "Resync required for the org units as they are missing a BP number."
+        End If
+        If ret = False Then
+        alert("ERROR correct window not open")
+        End If
+        End Sub
+        
+        Public Sub VDE()
+        ret = WShell.AppActivate ("MDM Maintenance Request")
+	If ret = True Then
+	WShell.AppActivate ("MDM Maintenance Request")
+        WShell.SendKeys "This error was found during a DRA data check using Information Steward, this vendor has flagged under rule SEARCH_TERM_2_DUPLICATES, as having a duplicate value in both the VAT and the SEARCH TERM 2 field."
+        WShell.SendKeys "{ENTER 2}"
+        WShell.SendKeys "Please perform the following with this vendor."
+        WShell.SendKeys "{ENTER}"
+        WShell.SendKeys "1. Verify search term 2 field is a duplicate"
+        WShell.SendKeys "{ENTER}"
+        WShell.SendKeys "2. Remove/delete search term 2 data"
+        WShell.SendKeys "{ENTER}"
+        WShell.SendKeys "3. Send for confirmation"
+	End If
+        If ret = False Then
+        alert("ERROR correct window not open")
+        End If
+        End Sub
+        
+        Public Sub VIPM()
+        ret = WShell.AppActivate ("MDM Maintenance Request")
+	If ret = True Then
+	WShell.AppActivate ("MDM Maintenance Request")
+        WShell.SendKeys "This error was found during a DRA data check using Information Steward, this vendor has flagged under rule CHK_VENDOR_CASH_MANGMENT_GROUP_PAYMENT_METHOD, as having a incorrect value in the Payment Method field. (See screenshot attached.)"
+	WShell.SendKeys "{ENTER 2}"
+        WShell.SendKeys "Please perform the following with this vendor."
+        WShell.SendKeys "{ENTER}"
+        WShell.SendKeys "1. Verify PAYMENT METHOD field is blank"
+        WShell.SendKeys "{ENTER}"
+        WShell.SendKeys "2. Add T to the PAYMENT METHOD field"
+        WShell.SendKeys "{ENTER}"
+        WShell.SendKeys "3. Send for confirmation"
+	End If
+        If ret = False Then
+        alert("ERROR correct window not open")
+        End If
+        End Sub
+        
+        
+        Public Sub PRTO()
+        ret = WShell.AppActivate ("HR Data Maintenance Request")
+	If ret = True Then
+	WShell.AppActivate ("HR Data Maintenance Request")
+        WShell.SendKeys "Position listed below doesn't have a current relationship to an org unit and is " & """floating""" & " in the system."
+        WShell.SendKeys "{ENTER 4}"
+        WShell.SendKeys "Please investigate and correct"
+        WShell.SendKeys "{UP 2}"
+	End If
+        If ret = False Then
+        alert("ERROR correct window not open")
+        End If
+        End Sub
+        
+        Public Sub GD()
+        ret = WShell.AppActivate ("Computer Access Request")
+	If ret = True Then
+	WShell.AppActivate ("Computer Access Request")
+        WShell.SendKeys "As part of Master Data's monthly audits, could you please provide me a list of people who have access to G Drive path:"
+        WShell.SendKeys "{ENTER}"
+        WShell.SendKeys "\\ad.bcc.qld.gov.au\Groups\OS\SSC\DRA\WORKING FILES\MASTER DATA"
+	End If
+        If ret = False Then
+        alert("ERROR correct window not open")
+        End If
+        End Sub
+        
+        Public Sub NAVBF()
+        ret = WShell.AppActivate ("MDM Maintenance Request")
+	If ret = True Then
+	WShell.AppActivate ("MDM Maintenance Request")
+        WShell.SendKeys "This error was found during a DRA data check using Information Steward, this vendor has flagged under rule RULE_CHK_MASS_UPDATE_ABN_BLOCKS, as not having a central purchasing block flag set and / or the block function is not set."
+        WShell.SendKeys "{ENTER}"
+        WShell.SendKeys "1. Verify request"
+        WShell.SendKeys "{ENTER}"
+        WShell.SendKeys "2. Set purchasing block flag"
+        WShell.SendKeys "{ENTER}"
+        WShell.SendKeys "3. Set block function to 01"
+        WShell.SendKeys "{ENTER}"
+        WShell.SendKeys "4. Screenshot and send for confirmation"
+	End If
+        If ret = False Then
+        alert("ERROR correct window not open")
+        End If
+        End Sub
+
+        Public Sub VBABN()
+        ret = WShell.AppActivate ("MDM Maintenance Request")
+	If ret = True Then
+	WShell.AppActivate ("MDM Maintenance Request")
+        WShell.SendKeys "The vendor has a cancelled ABN, has no recent activity and no open payments. (if there was recent activity attach the email sent to the business area). Data routine can be found at CA20/691999 - DRA - Monitor Cancelled ABN - DD MMM YYYY."
+        WShell.SendKeys "{ENTER 2}"
+        WShell.SendKeys "Please do the following:"
+        WShell.SendKeys "{ENTER}"
+        WShell.SendKeys "1.Verify ABN has been cancelled on ABN Lookup, save as PDF"
+        WShell.SendKeys "{ENTER}"
+        WShell.SendKeys "2.Recheck for open payments"
+        WShell.SendKeys "{ENTER}"
+        WShell.SendKeys "3.Check for portal contact"
+        WShell.SendKeys "{ENTER}"
+        WShell.SendKeys "4.Apply a purchase order block (01)"
+        WShell.SendKeys "{ENTER}"
+        WShell.SendKeys "5.Apply a payment block (B)"
+        WShell.SendKeys "{ENTER}"
+        WShell.SendKeys "6.Update Search Term 1 to ABN CANCEL"
+        WShell.SendKeys "{ENTER}"
+        WShell.SendKeys "7.Add a system note and comment e.g. ABN cancelled on ##/##/##, blocked on ##/##/##"
+        WShell.SendKeys "{ENTER}"
+        WShell.SendKeys "8.If there is a portal contact, wait 5mins and then remove (untick) the central lock"
+        WShell.SendKeys "{ENTER}"
+        WShell.SendKeys "9.Send for approval with a screenshot of display changes, open payments and the ABN Lookup PDF."
+	End If
+        If ret = False Then
+        alert("ERROR correct window not open")
+        End If
+        End Sub
+
+        Public Sub WEAP()
+        ret = WShell.AppActivate ("MDM Maintenance Request")
+	If ret = True Then
+	WShell.AppActivate ("MDM Maintenance Request")
+        WShell.SendKeys "During data quality routine Monitor Terminated Employees in Active Positions, the following withdrawn employee/s have/has active position records. Perform the investigation and any action. Both Master Data and Payroll need to investigate."
+        WShell.SendKeys "{ENTER 2}"
+	WShell.SendKeys "See attached screenshot."
+	End If
+        If ret = False Then
+        alert("ERROR correct window not open")
+        End If
+        End Sub
+        
+        Sub SAP()
+        WShell.Run "iexplore.exe" & " https://sapportalint.sap.bcc.qld.gov.au/irj/portal"
+	self.close()
+        End Sub
+        
+        Sub FlexSheet()
+        WShell.Run "iexplore.exe" & " https://sapportalint.sap.bcc.qld.gov.au/irj/servlet/prt/portal/prtroot/com.sap.portal.pagebuilder.IviewModeProxy?iview_id=pcd%3Aportal_content%2Fcom.sap.pct%2Fevery_user%2Fcom.sap.pct.erp.common.bp_folder%2Fcom.sap.pct.erp.common.roles%2Fcom.sap.pct.erp.common.erp_common%2Fcom.sap.pct.erp.common.lpd_start_wd_abap&iview_mode=default&&ApplicationParameter=&System=SAP_ECC_HumanResources&WebDynproApplication=ZP_WD_FLEXTIME_APP&WebDynproConfiguration=ZHRESS_AC_FLEX_TIME&WebDynproNamespace=sap&TarTitle=Complete%20a%20Flex%20Timesheet&NavigationTarget=navurl://b57a267aa9db3a999bc28fc3a8c2a9e6"
+        self.close()
+	End Sub
+        
+        Sub SAP2(varval)
+        WShell.Run "iexplore.exe" & " https://sapportalint.sap.bcc.qld.gov.au/irj/portal?NavigationTarget=navurl://" & varval
+        self.close()
+	End Sub
+
+        
+        Sub REMEDY()
+        WShell.Run "chrome.exe" & " https://brisbanecc.onbmc.com/"
+        End Sub
+        
+        Sub MYHELP()
+        WShell.Run "chrome.exe" & " https://brisbanecc-myit.onbmc.com/"
+        End Sub
+        
+        Sub PDF(varval)
+        WShell.Run ".\Templates\" & varval & ".pdf "
+        End Sub
+        
+        Sub STEWARD(varval)
+        WShell.Run "chrome.exe" & " https://infostew" & varval & "/BOE/InfoSteward"
+	self.close()
+        End Sub
+        
+        Sub RM()
+        WShell.Run """C:\Program Files\Micro Focus\Content Manager\trim.exe"""
+	self.close()
+        End Sub
+        
+   </script>
+   <style>
+        h1 {margin-bottom: 0px;margin-top: 10px;Color: White;}
+        h2 {margin-bottom: 0px;margin-top: 0px;Color: White;}
+        h4 {margin-bottom: 0px;margin-top: 0px;Color: White;}
+        h5 {margin-bottom: 0px;margin-top: 0px;Color: White;}
+        h6 {margin-bottom: 0px;margin-top: 0px;Color: White;}
+        h7 {margin-bottom: 0px;margin-top: 0px;Color: White;}
+        button {margin-bottom: 1px;margin-top: 1px;margin-right: 1px;margin-left: 1px;Color: Black;}
+        body {position: relative;margin-top: -10px;}
+   </style>
+   <Body Background="images/bg.jpg" onkeyup="ShortCutKeys">
+        <BR>
+        <button onclick="SAP2('8ff1ebcf71ea5c3b874228567a5ca143')">ECC</button>
+        <button onclick="SAP2('5c4c2bf6cab6436dfaad8f8c9b3a9fa2')">SRM</button>
+        <button onclick="SAP()">SAP Solution</button>
+        <button onclick="SAP2('524904eb18a0f91fd0e907df4224bab2')">Employee Self-Service</button>
+        <button onclick="SAP2('c9e39725dc335a3fcb6ff29acf165b86')">Strategic Sourcing</button>
+        <button onclick="SAP2('887fe5aae4a0738db06ed19a9794f097')">Universal Worklist</button><BR>
+        <button onclick="FlexSheet()">Flex Sheet</button>
+        <button onclick="REMEDY()">Remedy</button>
+	<button onclick="MYHELP()">MyHelp</button>
+	<button onclick="RM()">Records Manager</button><BR>
+        <a onclick="STEWARD('')"><img src="images/PRD.png" alt="Steward PRD" style="width:42px;height:62px;"></a>
+        <a onclick="STEWARD('-dev')"><img src="images/DEV.png" alt="Steward DEV" style="width:42px;height:62px;"></a>
+        <a onclick="STEWARD('-uat')"><img src="images/UAT.png" alt="Steward UAT" style="width:42px;height:62px;"></a>
+        <BR><BR>
+        <H2>
+        Please have the correct window open before clicking the button bellow. 
+        <H2>
+        <div id="Main">
+           <H1>My Help Portal</H1>
+           <H2>MDM Maintenance Request</H2>
+           <button onclick="OUBP()" style="Width: 350px;">Org Unit Dosn't Have a BP</button><button onclick="PDF('OUBP')">Template</button><BR>
+           <button onclick="VDE()" style="Width: 350px;">Search Term 2 And VAT Duplicated</button><button onclick="PDF('VDE')">Template</button><BR>
+           <button onclick="VIPM()" style="Width: 350px;">Vendor With Incorrect Payment Method</button><button onclick="PDF('VIPM')">Template</button><BR>
+           <button onclick="NAVBF()" style="Width: 350px;">Non ABN vendor without block</button><button onclick="PDF('NAVBF')">Template</button><BR>
+           <button onclick="VBABN()" style="Width: 350px;">Vendor With Blocked ABN & No Recent Order</button><button onclick="PDF('VBABN')">Template</button><BR>
+           <button onclick="WEAP()" style="Width: 350px;">Withdrawn Emp With Active Pos</button><button onclick="PDF('WEAP')">Template</button><BR>	
+           <H2>HR Data Maintenance Request</H2>
+           <button onclick="PRTO()" style="Width: 350px;">Position Dosn't Have a Relationship To An org Unit</button><button onclick="PDF('PRTO')">Template</button><BR>
+           <H2>Computer Access Request</H2>
+           <button onclick="GD()" style="Width: 350px;">G Drive Access List Request</button><button onclick="PDF('GD')">Template</button><BR><BR><BR>
+        </div>
+   </body>
+</html>
