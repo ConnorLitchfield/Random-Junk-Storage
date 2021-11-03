@@ -1,27 +1,12 @@
-﻿<!doctype html>
-<html>
-   <HTA:APPLICATION ID="oHTA" applicationname="MyHelper" ID="entry" SINGLEINSTANCE="yes" BORDER="thick" BORDERSTYLE="normal" CONTEXTMENU="yes" INNERBORDER="yes" ICON="images/hat.ico" />
-   <head>
-        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-        <title>My Helper</title>
-   </head>
-   <script type = "text/vbscript" >
-        Dim WShell: Set WShell = CreateObject("WScript.Shell")
+<script type="text/vbscript">
+ Dim WShell: Set WShell = CreateObject("WScript.Shell")
         Dim DShell: DShell = "436f6e6e6f72204c697463686669656c64"
         
         Public Sub Window_onLoad
         window.offscreenBuffering = True
-        window.resizeTo 500, 700
+        window.resizeTo 550, 750
         End Sub
         
-   	Sub ShortCutKeys()
-        intKeyCode = Window.Event.Keycode
-        If intKeyCode = 27 Then Window.Close 'ESC
-	If intKeyCode = 49 Then SAP2("8ff1ebcf71ea5c3b874228567a5ca143") '1
-	If intKeyCode = 50 Then SAP2("5c4c2bf6cab6436dfaad8f8c9b3a9fa2") '2
-	If intKeyCode = 51 Then SAP() '3
-    	End Sub
-
         Public Sub Sleep(intTimeWait)
         WShell.Run "%comspec% /c ping.exe 127.0.0.1 -w 1000 -n " & intTimeWait + 1, 0, True
         End Sub
@@ -168,17 +153,17 @@
         
         Sub SAP()
         WShell.Run "iexplore.exe" & " https://sapportalint.sap.bcc.qld.gov.au/irj/portal"
-	self.close()
+	
         End Sub
         
         Sub FlexSheet()
         WShell.Run "iexplore.exe" & " https://sapportalint.sap.bcc.qld.gov.au/irj/servlet/prt/portal/prtroot/com.sap.portal.pagebuilder.IviewModeProxy?iview_id=pcd%3Aportal_content%2Fcom.sap.pct%2Fevery_user%2Fcom.sap.pct.erp.common.bp_folder%2Fcom.sap.pct.erp.common.roles%2Fcom.sap.pct.erp.common.erp_common%2Fcom.sap.pct.erp.common.lpd_start_wd_abap&iview_mode=default&&ApplicationParameter=&System=SAP_ECC_HumanResources&WebDynproApplication=ZP_WD_FLEXTIME_APP&WebDynproConfiguration=ZHRESS_AC_FLEX_TIME&WebDynproNamespace=sap&TarTitle=Complete%20a%20Flex%20Timesheet&NavigationTarget=navurl://b57a267aa9db3a999bc28fc3a8c2a9e6"
-        self.close()
+        
 	End Sub
         
         Sub SAP2(varval)
         WShell.Run "iexplore.exe" & " https://sapportalint.sap.bcc.qld.gov.au/irj/portal?NavigationTarget=navurl://" & varval
-        self.close()
+        
 	End Sub
 
         
@@ -196,16 +181,17 @@
         
         Sub STEWARD(varval)
         WShell.Run "chrome.exe" & " https://infostew" & varval & "/BOE/InfoSteward"
-	self.close()
+	
         End Sub
         
         Sub RM()
         WShell.Run """C:\Program Files\Micro Focus\Content Manager\trim.exe"""
-	self.close()
+	
         End Sub
-        
-   </script>
-   <style>
+</script>
+
+<Body Background="images/bg.jpg" Background-color="Black">
+<style>
         h1 {margin-bottom: 0px;margin-top: 10px;Color: White;}
         h2 {margin-bottom: 0px;margin-top: 0px;Color: White;}
         h4 {margin-bottom: 0px;margin-top: 0px;Color: White;}
@@ -214,8 +200,7 @@
         h7 {margin-bottom: 0px;margin-top: 0px;Color: White;}
         button {margin-bottom: 1px;margin-top: 1px;margin-right: 1px;margin-left: 1px;Color: Black;}
         body {position: relative;margin-top: -10px;}
-   </style>
-   <Body Background="images/bg.jpg" onkeyup="ShortCutKeys">
+</style>
         <BR>
         <button onclick="SAP2('8ff1ebcf71ea5c3b874228567a5ca143')">ECC</button>
         <button onclick="SAP2('5c4c2bf6cab6436dfaad8f8c9b3a9fa2')">SRM</button>
@@ -248,5 +233,4 @@
            <H2>Computer Access Request</H2>
            <button onclick="GD()" style="Width: 350px;">G Drive Access List Request</button><button onclick="PDF('GD')">Template</button><BR><BR><BR>
         </div>
-   </body>
-</html>
+</body>
