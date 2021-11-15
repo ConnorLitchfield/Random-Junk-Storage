@@ -1,0 +1,47 @@
+﻿<html>
+   <HTA:APPLICATION border="none" showInTaskbar="YES" innerBorder="no" scroll="no" singleInstance="yes" contextmenu="no" ICON="icon.ico">
+   <script type = "text/vbscript">
+Dim WShell: Set WShell = CreateObject("WScript.Shell")
+
+Public Sub Window_onLoad
+window.offscreenBuffering = True
+window.resizeTo 345, 100
+window.moveTo 0, 950
+End Sub
+
+Sub ShortCutKeys()
+intKeyCode = Window.Event.Keycode
+If intKeyCode = 49 Then SendKey("±") 	//Number 1 = Previous
+If intKeyCode = 50 Then SendKey("³")	//Number 2 = Play / Pause
+If intKeyCode = 51 Then SendKey("°")	//Number 3 = Next
+If intKeyCode = 52 Then SendKey("²")	//Number 4 = Stop
+If intKeyCode = 53 Then SendKey("®®®")	//Number 5 = VolDown
+If intKeyCode = 54 Then SendKey("¯¯")	//Number 6 = VolUp
+End Sub
+
+Sub SendKey(varval)
+WShell.SendKeys varval
+End Sub  
+ 
+</script>
+
+<Body Background="images/bg.jpg" BGColor="black" onkeyup="ShortCutKeys">
+<a onclick="SendKey('±')"><img src="Prev.png" style="width:50px;height:50px;"></a>		<!-- Press Previous Once. -->
+<a onclick="SendKey('³')"><img src="PlayPause.png" style="width:50px;height:50px;"></a> <!-- Press Play/Pause Once. -->
+<a onclick="SendKey('°')"><img src="Next.png" style="width:50px;height:50px;"></a>		<!-- Press Next Once. -->
+<a onclick="SendKey('²')"><img src="Stop.png" style="width:50px;height:50px;"></a>		<!-- Press Stop Once. -->
+<a onclick="SendKey('®®®')"><img src="VolDown.png" style="width:50px;height:50px;"></a> <!-- Press VolDown 3 times. -->
+<a onclick="SendKey('¯¯')"><img src="VolUp.png" style="width:50px;height:50px;"></a> 	<!-- Press VolUp 2 times. -->
+</body>
+
+<!-- 
+Mute/Unmute: 173 / ­
+Volume Down: 174 / ®
+Volume Up: 175 / ¯
+Next Track: 176 / °
+Previous Track: 177 / ±
+Stop Media: 178 / ²
+Play/Pause: 179 / ³
+-->
+
+</html>
